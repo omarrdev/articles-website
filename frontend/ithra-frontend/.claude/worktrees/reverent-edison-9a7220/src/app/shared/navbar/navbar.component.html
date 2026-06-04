@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg" style="background-color: var(--navbar-bg); border-bottom: 1px solid var(--border-color);">
+  <div class="container">
+    <a class="navbar-brand fw-bold" routerLink="/">إثراء | Ithra</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/articles" routerLinkActive="active">Articles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/categories" routerLinkActive="active">Categories</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav align-items-center gap-2">
+        <li class="nav-item">
+          <button class="btn btn-sm btn-outline-secondary" (click)="theme.toggle()" title="Toggle theme">
+            {{ theme.isDark() ? '☀️' : '🌙' }}
+          </button>
+        </li>
+
+        @if (auth.isLoggedIn()) {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+          </li>
+          @if (auth.isAdmin()) {
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/admin" routerLinkActive="active">Admin</a>
+            </li>
+          }
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown">
+              <span class="avatar-initials">{{ initials }}</span>
+              {{ auth.currentUser()?.username }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><button class="dropdown-item text-danger" (click)="logout()">Logout</button></li>
+            </ul>
+          </li>
+        } @else {
+          <li class="nav-item">
+            <a class="btn btn-outline-primary btn-sm" routerLink="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-primary btn-sm" routerLink="/register">Register</a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>

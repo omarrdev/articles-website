@@ -1,0 +1,66 @@
+<div class="container py-4">
+  <h2 class="mb-4 fw-semibold" style="color:var(--text-primary);">Admin Overview</h2>
+
+  <!-- Stats -->
+  @if (stats(); as s) {
+    <div class="row g-3 mb-4">
+      @for (card of [
+        {label:'Articles', value:s.totalArticles, icon:'📄'},
+        {label:'Users', value:s.totalUsers, icon:'👥'},
+        {label:'Views', value:s.totalViews, icon:'👁'},
+        {label:'Likes', value:s.totalLikes, icon:'❤️'},
+        {label:'Comments', value:s.totalComments, icon:'💬'}
+      ]; track card.label) {
+        <div class="col-6 col-lg">
+          <div class="card text-center p-3" style="background-color:var(--card-bg);border-color:var(--border-color);">
+            <div class="fs-4">{{ card.icon }}</div>
+            <div class="fs-3 fw-bold" style="color:var(--accent);">{{ card.value }}</div>
+            <div class="small" style="color:var(--text-secondary);">{{ card.label }}</div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+
+  <!-- Charts -->
+  <div class="row g-4 mb-4">
+    <div class="col-md-5">
+      <div class="card p-3" style="background-color:var(--card-bg);border-color:var(--border-color);">
+        <h6 style="color:var(--text-primary);">Articles per Month</h6>
+        <canvas baseChart [data]="lineData" [options]="lineOptions" type="line"></canvas>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="card p-3" style="background-color:var(--card-bg);border-color:var(--border-color);">
+        <h6 style="color:var(--text-primary);">Views per Month</h6>
+        <canvas baseChart [data]="barData" [options]="barOptions" type="bar"></canvas>
+      </div>
+    </div>
+    <div class="col-md-2">
+      <div class="card p-3" style="background-color:var(--card-bg);border-color:var(--border-color);">
+        <h6 style="color:var(--text-primary);">By Category</h6>
+        <canvas baseChart [data]="doughnutData" [options]="doughnutOptions" type="doughnut"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- Top Articles -->
+  <h5 class="mb-3" style="color:var(--text-primary);">Top 10 Articles</h5>
+  <div class="table-responsive">
+    <table class="table" style="color:var(--text-primary);">
+      <thead><tr><th>#</th><th>Cover</th><th>Title</th><th>Author</th><th>Views</th><th>Likes</th></tr></thead>
+      <tbody>
+        @for (a of topArticles(); track a.id; let i = $index) {
+          <tr style="border-color:var(--border-color);">
+            <td>{{ i + 1 }}</td>
+            <td><img [src]="a.coverImageUrl || 'https://placehold.co/50x35'" width="50" height="35" style="object-fit:cover;border-radius:4px;" /></td>
+            <td><a [routerLink]="['/articles', a.slug]" style="color:var(--accent);">{{ a.title }}</a></td>
+            <td>{{ a.author?.username }}</td>
+            <td>{{ a.viewCount }}</td>
+            <td>{{ a.likeCount }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

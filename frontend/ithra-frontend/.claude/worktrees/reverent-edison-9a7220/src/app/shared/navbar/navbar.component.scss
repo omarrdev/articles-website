@@ -1,0 +1,22 @@
+.avatar-initials {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.navbar-brand {
+  color: var(--accent) !important;
+  font-size: 1.25rem;
+}
+
+.nav-link {
+  color: var(--text-primary) !important;
+  &.active { color: var(--accent) !important; }
+}

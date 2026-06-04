@@ -1,0 +1,31 @@
+<div class="min-vh-100 d-flex align-items-center justify-content-center" style="background-color: var(--bg-secondary);">
+  <div class="card shadow-sm p-4" style="width: 100%; max-width: 420px; background-color: var(--card-bg); border-color: var(--border-color);">
+    <h3 class="text-center mb-4" style="color: var(--text-primary);">Login to إثراء</h3>
+
+    @if (error()) {
+      <div class="alert alert-danger">{{ error() }}</div>
+    }
+
+    <form (ngSubmit)="submit()">
+      <div class="mb-3">
+        <label class="form-label" style="color: var(--text-primary);">Email</label>
+        <input type="email" class="form-control" [(ngModel)]="email" name="email" required
+               style="background-color: var(--bg-secondary); color: var(--text-primary); border-color: var(--border-color);" />
+      </div>
+      <div class="mb-3">
+        <label class="form-label" style="color: var(--text-primary);">Password</label>
+        <input type="password" class="form-control" [(ngModel)]="password" name="password" required
+               style="background-color: var(--bg-secondary); color: var(--text-primary); border-color: var(--border-color);" />
+      </div>
+      <button class="btn btn-primary w-100" type="submit" [disabled]="loading()">
+        {{ loading() ? 'Logging in...' : 'Login' }}
+      </button>
+    </form>
+
+    <div class="text-center mt-3 small" style="color: var(--text-secondary);">
+      <a routerLink="/forgot-password" style="color: var(--accent);">Forgot password?</a>
+      &nbsp;·&nbsp;
+      <a routerLink="/register" style="color: var(--accent);">Create account</a>
+    </div>
+  </div>
+</div>

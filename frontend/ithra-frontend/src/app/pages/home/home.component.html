@@ -1,0 +1,53 @@
+<!-- Hero -->
+@if (hero()) {
+  <section class="hero-section position-relative mb-5" style="height:480px;overflow:hidden;">
+    <img [src]="hero()!.coverImageUrl || 'https://placehold.co/1400x480?text=Ithra'" class="w-100 h-100" style="object-fit:cover;" [alt]="hero()!.title" />
+    <div class="position-absolute inset-0 d-flex flex-column justify-content-end p-4 p-md-5"
+         style="background:linear-gradient(transparent,rgba(0,0,0,0.75));inset:0;">
+      <span class="badge mb-2" style="background-color:var(--accent);width:fit-content;">{{ hero()!.category?.name }}</span>
+      <h1 class="text-white fw-bold fs-2 fs-md-1">{{ hero()!.title }}</h1>
+      <p class="text-white-50 d-none d-md-block">{{ hero()!.summary }}</p>
+      <a [routerLink]="['/articles', hero()!.slug]" class="btn btn-primary" style="width:fit-content;">Read Article</a>
+    </div>
+  </section>
+}
+
+<div class="container py-4">
+  <div class="row g-4">
+    <!-- Articles grid -->
+    <div class="col-lg-9">
+      <h2 class="mb-4 fw-semibold" style="color:var(--text-primary);">Latest Articles</h2>
+      <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4">
+        @for (article of articles(); track article.id) {
+          <div class="col">
+            <app-article-card [article]="article" />
+          </div>
+        }
+        @empty {
+          <p style="color:var(--text-secondary);">No articles yet.</p>
+        }
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="col-lg-3">
+      <div class="card" style="background-color:var(--card-bg);border-color:var(--border-color);">
+        <div class="card-header" style="background-color:var(--bg-secondary);border-color:var(--border-color);">
+          <h5 class="mb-0" style="color:var(--text-primary);">Popular Categories</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          @for (cat of categories(); track cat.id) {
+            <li class="list-group-item d-flex justify-content-between align-items-center"
+                style="background-color:var(--card-bg);color:var(--text-primary);border-color:var(--border-color);">
+              <a [routerLink]="['/categories', cat.slug]" style="color:var(--accent);text-decoration:none;">{{ cat.name }}</a>
+              <span class="badge rounded-pill" style="background-color:var(--accent);">{{ cat.articleCount ?? 0 }}</span>
+            </li>
+          }
+          @empty {
+            <li class="list-group-item" style="background-color:var(--card-bg);color:var(--text-secondary);">No categories</li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

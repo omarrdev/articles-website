@@ -1,0 +1,30 @@
+<div class="container py-4">
+  <h2 class="mb-4 fw-semibold" style="color:var(--text-primary);">Manage Users</h2>
+  <div class="table-responsive">
+    <table class="table" style="color:var(--text-primary);">
+      <thead><tr><th>#</th><th>Username</th><th>Email</th><th>Role</th><th>Verified</th><th>Joined</th><th>Actions</th></tr></thead>
+      <tbody>
+        @for (u of users(); track u.id; let i = $index) {
+          <tr style="border-color:var(--border-color);">
+            <td>{{ i + 1 }}</td>
+            <td>{{ u.username }}</td>
+            <td>{{ u.email }}</td>
+            <td>
+              <div class="d-flex gap-1">
+                <select class="form-select form-select-sm" [(ngModel)]="roleEdits[u.id]"
+                        style="background-color:var(--bg-secondary);color:var(--text-primary);border-color:var(--border-color);width:120px;">
+                  <option>READER</option><option>AUTHOR</option><option>ADMIN</option>
+                </select>
+                <button class="btn btn-sm btn-outline-success" (click)="saveRole(u.id)">Save</button>
+              </div>
+            </td>
+            <td>{{ u.isEmailVerified ? '✅' : '❌' }}</td>
+            <td>{{ u.createdAt | date:'mediumDate' }}</td>
+            <td><button class="btn btn-sm btn-outline-danger" (click)="confirmDelete(u.id)">🗑</button></td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-confirm-dialog message="Delete this user?" [visible]="confirmVisible" (confirmed)="onConfirmed($event)" />

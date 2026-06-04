@@ -1,0 +1,72 @@
+<div class="container py-4" style="max-width:860px;">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-semibold mb-0" style="color:var(--text-primary);">{{ editId ? 'Edit Article' : 'New Article' }}</h2>
+    <a routerLink="/dashboard/articles" class="btn btn-outline-secondary btn-sm">← Back</a>
+  </div>
+
+  @if (error()) { <div class="alert alert-danger">{{ error() }}</div> }
+
+  <div class="mb-3">
+    <label class="form-label" style="color:var(--text-primary);">Title</label>
+    <input type="text" class="form-control" [(ngModel)]="form.title" name="title"
+           style="background-color:var(--bg-secondary);color:var(--text-primary);border-color:var(--border-color);" />
+    @if (form.title) {
+      <div class="form-text" style="color:var(--text-secondary);">Slug: <code>{{ slug }}</code></div>
+    }
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label" style="color:var(--text-primary);">Summary</label>
+    <textarea class="form-control" [(ngModel)]="form.summary" name="summary" rows="2"
+              style="background-color:var(--bg-secondary);color:var(--text-primary);border-color:var(--border-color);"></textarea>
+  </div>
+
+  <div class="row g-3 mb-3">
+    <div class="col-md-6">
+      <label class="form-label" style="color:var(--text-primary);">Category</label>
+      <select class="form-select" [(ngModel)]="form.categoryId" name="category"
+              style="background-color:var(--bg-secondary);color:var(--text-primary);border-color:var(--border-color);">
+        <option [ngValue]="null">Select category...</option>
+        @for (cat of categories(); track cat.id) {
+          <option [ngValue]="cat.id">{{ cat.name }}</option>
+        }
+      </select>
+    </div>
+    <div class="col-md-6">
+      <label class="form-label" style="color:var(--text-primary);">Cover Image</label>
+      <input type="file" class="form-control" accept="image/*" (change)="onCoverChange($event)"
+             style="background-color:var(--bg-secondary);color:var(--text-primary);border-color:var(--border-color);" />
+      @if (coverPreview()) {
+        <img [src]="coverPreview()" class="mt-2 rounded" style="max-height:120px;object-fit:cover;" />
+      }
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label" style="color:var(--text-primary);">Tags</label>
+    <div class="d-flex flex-wrap gap-2">
+      @for (tag of tags(); track tag.id) {
+        <button type="button" class="btn btn-sm"
+                [class.btn-primary]="isTagSelected(tag.id)"
+                [class.btn-outline-secondary]="!isTagSelected(tag.id)"
+                (click)="toggleTag(tag.id)">
+          #{{ tag.name }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="mb-4">
+    <label class="form-label" style="color:var(--text-primary);">Content</label>
+    <ckeditor [editor]="Editor" [config]="editorConfig" [(ngModel)]="form.content" name="content"></ckeditor>
+  </div>
+
+  <div class="d-flex gap-2">
+    <button class="btn btn-outline-secondary" type="button" (click)="save(false)" [disabled]="loading()">
+      {{ loading() ? 'Saving...' : 'Save as Draft' }}
+    </button>
+    <button class="btn btn-primary" type="button" (click)="save(true)" [disabled]="loading()">
+      {{ loading() ? 'Publishing...' : 'Publish' }}
+    </button>
+  </div>
+</div>

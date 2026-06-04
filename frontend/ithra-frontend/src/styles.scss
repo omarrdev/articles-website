@@ -1,0 +1,54 @@
+@import 'bootstrap/scss/bootstrap';
+@import 'ckeditor5/ckeditor5.css';
+
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --border-color: #dee2e6;
+  --card-bg: #ffffff;
+  --navbar-bg: #ffffff;
+  --accent: #0d6efd;
+}
+
+body.theme-dark {
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #16213e;
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0b0;
+  --border-color: #2a2a4a;
+  --card-bg: #16213e;
+  --navbar-bg: #0f0f23;
+  --accent: #4d8ef0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.dropdown-menu {
+  background-color: var(--card-bg);
+  border-color: var(--border-color);
+}
+.dropdown-item {
+  color: var(--text-primary);
+  &:hover { background-color: var(--bg-secondary); }
+}
+
+.table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text-primary);
+  --bs-table-border-color: var(--border-color);
+}
+
+.form-control, .form-select {
+  &:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+  }
+}
+
+code { color: var(--accent); }

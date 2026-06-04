@@ -1,0 +1,40 @@
+<div class="container py-4">
+  <h2 class="mb-4 fw-semibold" style="color:var(--text-primary);">Manage Articles</h2>
+  <div class="table-responsive">
+    <table class="table" style="color:var(--text-primary);">
+      <thead>
+        <tr><th>Cover</th><th>Title</th><th>Author</th><th>Category</th><th>Status</th><th>Views</th><th>Likes</th><th>Date</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        @for (a of articles(); track a.id) {
+          <tr style="border-color:var(--border-color);">
+            <td><img [src]="a.coverImageUrl || 'https://placehold.co/50x35'" width="50" height="35" style="object-fit:cover;border-radius:4px;" /></td>
+            <td class="fw-medium" style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ a.title }}</td>
+            <td>{{ a.author?.username }}</td>
+            <td>{{ a.category?.name }}</td>
+            <td>
+              <span class="badge" [style.background-color]="a.status === 'PUBLISHED' ? '#198754' : '#6c757d'">{{ a.status }}</span>
+            </td>
+            <td>{{ a.viewCount }}</td>
+            <td>{{ a.likeCount }}</td>
+            <td>{{ a.createdAt | date:'mediumDate' }}</td>
+            <td>
+              <div class="d-flex gap-1">
+                <a [routerLink]="['/articles', a.slug]" class="btn btn-sm btn-outline-secondary" title="View">👁</a>
+                <a [routerLink]="['/dashboard/articles', a.id, 'edit']" class="btn btn-sm btn-outline-primary" title="Edit">✏️</a>
+                @if (a.status === 'PUBLISHED') {
+                  <button class="btn btn-sm btn-outline-warning" (click)="hide(a.id)" title="Hide">🙈</button>
+                }
+                <button class="btn btn-sm btn-outline-danger" (click)="confirmDelete(a.id)" title="Delete">🗑</button>
+              </div>
+            </td>
+          </tr>
+        }
+        @empty {
+          <tr><td colspan="9" class="text-center" style="color:var(--text-secondary);">No articles.</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-confirm-dialog message="Delete this article permanently?" [visible]="confirmVisible" (confirmed)="onConfirmed($event)" />

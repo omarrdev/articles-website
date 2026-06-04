@@ -1,0 +1,44 @@
+<div class="container py-4">
+  <h2 class="mb-4 fw-semibold" style="color:var(--text-primary);">Manage Categories</h2>
+
+  <div class="card p-4 mb-4" style="background-color:var(--card-bg);border-color:var(--border-color);">
+    <h5 style="color:var(--text-primary);">{{ editingId ? 'Edit Category' : 'Add Category' }}</h5>
+    <form (ngSubmit)="submit()" class="row g-2">
+      <div class="col-md-4">
+        <input type="text" class="form-control" placeholder="Name" [(ngModel)]="form.name" name="name" required
+               style="background-color:var(--bg-secondary);color:var(--text-primary);border-color:var(--border-color);" />
+      </div>
+      <div class="col-md-5">
+        <input type="text" class="form-control" placeholder="Description" [(ngModel)]="form.description" name="description"
+               style="background-color:var(--bg-secondary);color:var(--text-primary);border-color:var(--border-color);" />
+      </div>
+      <div class="col-md-3 d-flex gap-2">
+        <button class="btn btn-primary" type="submit">{{ editingId ? 'Update' : 'Add' }}</button>
+        @if (editingId) { <button class="btn btn-secondary" type="button" (click)="cancel()">Cancel</button> }
+      </div>
+    </form>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table" style="color:var(--text-primary);">
+      <thead><tr><th>Name</th><th>Slug</th><th>Description</th><th>Articles</th><th>Actions</th></tr></thead>
+      <tbody>
+        @for (cat of categories(); track cat.id) {
+          <tr style="border-color:var(--border-color);">
+            <td>{{ cat.name }}</td>
+            <td><code style="color:var(--text-secondary);">{{ cat.slug }}</code></td>
+            <td>{{ cat.description }}</td>
+            <td>{{ cat.articleCount ?? 0 }}</td>
+            <td>
+              <div class="d-flex gap-1">
+                <button class="btn btn-sm btn-outline-primary" (click)="edit(cat)">✏️</button>
+                <button class="btn btn-sm btn-outline-danger" (click)="confirmDelete(cat.id)">🗑</button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-confirm-dialog message="Delete this category?" [visible]="confirmVisible" (confirmed)="onConfirmed($event)" />

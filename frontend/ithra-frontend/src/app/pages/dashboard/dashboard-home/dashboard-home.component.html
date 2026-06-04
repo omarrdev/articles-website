@@ -1,0 +1,37 @@
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="fw-semibold mb-0" style="color:var(--text-primary);">Dashboard</h2>
+    <a routerLink="/dashboard/articles/new" class="btn btn-primary">✏️ Write New Article</a>
+  </div>
+
+  <div class="row g-4 mb-4">
+    <div class="col-6 col-lg-3">
+      <div class="card text-center p-3" style="background-color:var(--card-bg);border-color:var(--border-color);">
+        <div class="fs-2 fw-bold" style="color:var(--accent);">{{ totalArticles }}</div>
+        <div class="small" style="color:var(--text-secondary);">My Articles</div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card text-center p-3" style="background-color:var(--card-bg);border-color:var(--border-color);">
+        <div class="fs-2 fw-bold" style="color:var(--accent);">{{ drafts }}</div>
+        <div class="small" style="color:var(--text-secondary);">Drafts</div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card text-center p-3" style="background-color:var(--card-bg);border-color:var(--border-color);">
+        <div class="fs-2 fw-bold" style="color:var(--accent);">{{ totalViews }}</div>
+        <div class="small" style="color:var(--text-secondary);">Total Views</div>
+      </div>
+    </div>
+    <div class="col-6 col-lg-3">
+      <div class="card text-center p-3" style="background-color:var(--card-bg);border-color:var(--border-color);">
+        <div class="fs-2 fw-bold" style="color:var(--accent);">{{ totalLikes }}</div>
+        <div class="small" style="color:var(--text-secondary);">Total Likes</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center">
+    <a routerLink="/dashboard/articles" class="btn btn-outline-primary">View My Articles →</a>
+  </div>
+</div>
