@@ -44,7 +44,7 @@ articles-website/
 
 ## Quick Start
 
-```bash
+bash
 # Backend
 cd backend/ithra
 ./mvnw spring-boot:run        # → http://localhost:8080
@@ -63,7 +63,7 @@ License
 MIT
 
 
-```markdown
+markdown
 # Ithra — Backend API
 
 REST API for the Ithra articles platform. Built on Spring Boot 4.1 and Java 25.
@@ -96,12 +96,12 @@ mapper (MapStruct) ←→ DTOs (records / Lombok classes)
 
 Requires Java 25, Maven, MySQL 8+.
 
-```bash
+bash
 ./mvnw spring-boot:run
 
 ## 3. frontend/README.md (new file)
 
-```markdown
+markdown
 # Ithra — Frontend
 
 Angular single-page application for the Ithra articles platform.
@@ -130,7 +130,7 @@ Angular single-page application for the Ithra articles platform.
 
 ## Run
 
-```bash
+bash
 npm install
 npm start
 
