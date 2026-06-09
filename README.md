@@ -1,16 +1,14 @@
-<img width="1919" height="858" alt="5" src="https://github.com/user-attachments/assets/b092cacf-07b6-476d-bb61-4b3fbed2f602" /># Ithra — إثراء
-
 A full-stack articles publishing platform. Writers publish, readers discover, admins moderate.
 
 > **إثراء** (Ithra) is Arabic for *enrichment* — the platform's purpose is to enrich readers
 > with thoughtful, well-categorized content from a community of authors.
 
-<img width="1919" height="2202" alt="1" src="https://github.com/user-attachments/assets/06b51323-6d15-4a61-aac0-0e4ed820dba4" />
 <img width="1919" height="2777" alt="3" src="https://github.com/user-attachments/assets/7c10b82e-1c11-46ae-a688-af6b629f9172" />
+<img width="1919" height="1582" alt="2" src="https://github.com/user-attachments/assets/6801f5d6-1332-436f-9dfa-2b799c2e18f6" />
+<img width="1919" height="2202" alt="1" src="https://github.com/user-attachments/assets/06b51323-6d15-4a61-aac0-0e4ed820dba4" />
 <img width="1919" height="1072" alt="4" src="https://github.com/user-attachments/assets/77e0a9a3-1e38-4f1d-9f75-43a877ff8591" />
 <img width="1919" height="858" alt="5" src="https://github.com/user-attachments/assets/5aff9da1-7377-4cdb-aa89-afb1069ccf46" />
 <img width="1919" height="858" alt="6" src="https://github.com/user-attachments/assets/174ae0c3-e93a-49c1-86a0-2dc4fccdb2e7" />
-<img width="1919" height="1582" alt="2" src="https://github.com/user-attachments/assets/6801f5d6-1332-436f-9dfa-2b799c2e18f6" />
 
 ## Overview
 
